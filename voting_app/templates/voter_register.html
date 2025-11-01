@@ -1,0 +1,29 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+{% extends 'base.html' %}
+
+{% block title %}Voter Registration{% endblock %}
+
+{% block content %}
+<h2>Voter Registration</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: green;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+

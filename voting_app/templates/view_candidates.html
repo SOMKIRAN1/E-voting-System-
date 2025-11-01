@@ -1,0 +1,41 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Candidate Information</h2>
+
+  <div class="row">
+    {% for candidate in candidates %}
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <img src="{{ candidate.election_symbol.url }}" class="card-img-top" alt="Symbol"
+               style="height: 200px; object-fit: contain;">
+          <div class="card-body">
+            <h5 class="card-title">{{ candidate.name }}</h5>
+            <p><strong>Party:</strong> {{ candidate.party_name }}</p>
+            <p><strong>Constituency:</strong> {{ candidate.constituency }}</p>
+            <p><strong>Age:</strong> {{ candidate.age }}</p>
+            <p><strong>Qualification:</strong> {{ candidate.qualifications }}</p>
+            <p><strong>Promises:</strong></p>
+            <ul>
+              {% for promise in candidate.promises.splitlines %}
+              <li>{{ promise }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No candidates registered yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

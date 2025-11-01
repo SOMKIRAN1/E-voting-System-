@@ -1,0 +1,37 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online E-Voting System</title>
+</head>
+<body>
+    <h1>Welcome to the Online E-Voting Portal</h1>
+    <ul>
+        <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+        <li><a href="{% url 'voter_register' %}">Voter Registration</a></li>
+        <li><a href="{% url 'candidate_register' %}">Candidate Registration</a></li>
+        <li><a href="{% url 'voter_login' %}">Voter Login</a></li>
+        <li><a href="{% url 'view_candidates' %}" class="btn btn-info">View Candidates</a></li>
+        <li><a href="{% url 'election_results' %}">Election Results</a></li>
+
+        
+    
+       
+
+    
+    <p>For ECI officials: <a href='/eci_login/'>ECI Login</a></p>
+    
+
+        {% comment %} <li><a href="{% url 'dashboard' %}">View Candidates</a></li> {% endcomment %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,49 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voter Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 30px; }
+        .card { background: white; padding: 20px; border-radius: 10px; margin: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .symbol { width: 100px; height: 100px; object-fit: contain; }
+        .btn { background-color: #007bff; color: white; padding: 8px 15px; border: none; border-radius: 5px; text-decoration: none; }
+        .btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h2>Welcome, {{ voter.name }}</h2>
+    <h3>Available Candidates</h3>
+
+    {% for candidate in candidates %}
+    <div class="card">
+        <h4>{{ candidate.name }} ({{ candidate.party_name }})</h4>
+        <p><strong>Constituency:</strong> {{ candidate.constituency }}</p>
+        <p><strong>Age:</strong> {{ candidate.age }}</p>
+        <p><strong>Qualifications:</strong> {{ candidate.qualifications }}</p>
+        <p><strong>Promises:</strong> {{ candidate.promises }}</p>
+        <img src="{{ candidate.election_symbol.url }}" alt="Symbol" class="symbol"><br><br>
+
+        {% if voter.has_voted %}
+            <button class="btn" disabled>You have already voted</button>
+        {% else %}
+            <form method="post" action="{% url 'vote_candidate' candidate.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn">Vote</button>
+            </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</body>
+</html>
+

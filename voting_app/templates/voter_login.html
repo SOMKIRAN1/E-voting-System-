@@ -1,0 +1,22 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <label for="voter_card_id">Voter Card ID:</label><br>
+    <input type="text" id="voter_card_id" name="voter_card_id" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <button type="submit">Login</button>
+</form>
+
+
+

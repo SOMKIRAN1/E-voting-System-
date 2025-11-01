@@ -1,0 +1,35 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}E-Voting System{% endblock %}</title>
+</head>
+<body>
+    <h1>Online E-Voting System</h1>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'voter_register' %}">Voter Registration</a>
+        <a href="{% url 'candidate_register' %}">Candidate Registration</a>
+        {% comment %} <a href="{% url 'candidate_dashboard' %}">View Candidates</a> {% endcomment %}
+        <a href="{% url 'voter_logout' %}" class="btn btn-outline-danger">Logout</a>
+        <a href="{% url 'view_candidates' %}" class="btn btn-primary">View Candidates</a>
+
+
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

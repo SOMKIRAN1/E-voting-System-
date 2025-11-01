@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Admin Dashboard</h2>
+  <p class="text-center fw-bold">Welcome, {{ admin_name }}</p>
+
+  <form method="get" class="text-center mb-4">
+    <label for="constituency">Select Constituency:</label>
+    <select name="constituency" id="constituency" onchange="this.form.submit()">
+      <option value="">All Constituencies</option>
+      {% for const in constituencies %}
+      <option value="{{ const }}" {% if const == selected_constituency %}selected{% endif %}>
+        {{ const }}
+      </option>
+      {% endfor %}
+    </select>
+  </form>
+
+  <table class="table table-bordered table-striped mt-4 shadow-sm">
+    <thead class="table-primary">
+      <tr>
+        <th>Candidate Name</th>
+        <th>Party</th>
+        <th>Constituency</th>
+        <th>Votes Received</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for candidate in candidates %}
+      <tr>
+        <td>{{ candidate.name }}</td>
+        <td>{{ candidate.party_name }}</td>
+        <td>{{ candidate.constituency }}</td>
+        <td><strong>{{ candidate.total_votes }}</strong></td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">No candidates available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'admin_login' %}" class="btn btn-danger">Logout</a>
+  </div>
+</div>
+{% endblock %}

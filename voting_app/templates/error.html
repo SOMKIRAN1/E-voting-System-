@@ -1,0 +1,16 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center mt-5">
+  <h3 class="text-danger">{{ message }}</h3>
+  <a href="/" class="btn btn-secondary mt-3">Go Back</a>
+</div>
+{% endblock %}

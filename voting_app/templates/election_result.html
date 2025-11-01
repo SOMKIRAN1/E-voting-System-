@@ -1,0 +1,67 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Election Results</h2>
+
+  <form method="get" class="text-center mb-4">
+    <label for="constituency">Search by Constituency:</label>
+    <input type="text" id="constituency" name="constituency" value="{{ selected_constituency }}" class="form-control d-inline-block w-50">
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+  </form>
+
+  {% if top_candidate %}
+    <div class="card shadow p-4 mb-5 text-center">
+      <h4 class="text-success">🏆 Winner: {{ top_candidate.name }} ({{ top_candidate.party_name }})</h4>
+      <p><strong>Constituency:</strong> {{ top_candidate.constituency }}</p>
+      <p><strong>Age:</strong> {{ top_candidate.age }}</p>
+      <p><strong>Qualification:</strong> {{ top_candidate.qualifications }}</p>
+      <p><strong>Total Votes:</strong> {{ total_votes }}</p>
+      <div class="text-center mt-3">
+        <img src="{{ top_candidate.election_symbol.url }}" alt="Election Symbol" style="height:150px; object-fit:contain;">
+      </div>
+    </div>
+  {% elif selected_constituency %}
+    <p class="text-center text-danger mt-4">No candidates found for "{{ selected_constituency }}"</p>
+  {% else %}
+    <p class="text-center text-muted mt-4">Please enter a constituency name to view results.</p>
+  {% endif %}
+
+  {% if candidate_votes %}
+    <h5 class="text-center mt-5 mb-3">All Candidates</h5>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Constituency</th>
+          <th>Total Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in candidate_votes %}
+          <tr>
+            <td>{{ item.candidate.name }}</td>
+            <td>{{ item.candidate.party_name }}</td>
+            <td>{{ item.candidate.constituency }}</td>
+            <td>{{ item.vote_count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+
+

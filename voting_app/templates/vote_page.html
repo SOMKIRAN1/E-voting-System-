@@ -1,0 +1,30 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+
+
+
+
+<h1>Vote for Your Candidate</h1>
+
+{% if messages %}
+  {% for msg in messages %}
+    <p style="color:green;">{{ msg }}</p>
+  {% endfor %}
+{% endif %}
+
+<form method="POST">
+  {% csrf_token %}
+  {% for candidate in candidates %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+      <p><strong>{{ candidate.name }}</strong> ({{ candidate.party_name }})</p>
+      <p>Age: {{ candidate.age }}</p>
+      <p>Promises: {{ candidate.promises }}</p>
+      <img src="{{ candidate.election_symbol.url }}" width="80">
+      <button name="candidate_id" value="{{ candidate.id }}">Vote</button>
+    </div>
+  {% endfor %}
+</form>
